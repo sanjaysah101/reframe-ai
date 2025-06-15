@@ -2,8 +2,9 @@ import { NextRequest, NextResponse } from "next/server";
 
 import puppeteer from "puppeteer";
 
-import { analyzeAndModernizeUrl } from "@/lib/geminiService";
+// import { analyzeAndModernizeUrl } from "@/lib/geminiService";
 
+import { analyzeAndModernizeUrl } from "../../../lib/novitaAI";
 import { TransformedData } from "../../../lib/types";
 
 export async function POST(request: NextRequest) {

@@ -1,0 +1,41 @@
+generator client {
+  provider = "prisma-client-js"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+model PreviewData {
+  id                    String   @id @default(auto()) @map("_id") @db.ObjectId
+  previewId             String   @unique
+
+  // ScrapedData
+  url                   String
+  screenshot            String
+  metadata              Metadata
+  structure             Json
+  styles                Json
+  extractedAt           DateTime
+  html                  String
+
+  // TransformedData
+  transformedHtml       String
+  transformedScreenshot String
+  theme                 String
+  transformedAt         DateTime
+
+  createdAt             DateTime @default(now())
+  updatedAt             DateTime @updatedAt
+
+  @@map("preview_data")
+}
+
+type Metadata {
+  title       String
+  description String
+  keywords    String[] // MongoDB supports string[] in embedded documents
+  language    String
+}
